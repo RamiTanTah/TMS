@@ -10,3 +10,10 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
+routes/admin.php
+resources/views/false.blade.php
+app/Models/Permission.php
+app/Models/RolePermission.php
+app/Providers/RouteServiceProvider.php
+
+.gitignore

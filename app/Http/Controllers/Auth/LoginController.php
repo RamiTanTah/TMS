@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Auth;
+use App\User;
+use  Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
+
 class LoginController extends Controller
 {
     /*
@@ -37,4 +42,40 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    // ####################################
+    // # edit on default login controller #
+    // ####################################
+
+    public function username(){
+      return 'name';
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if ($user->accountStatus_id != 1) {
+            Auth::logout();
+            return redirect('/login')->with('message','Your Account is closed by Administrator');
+        }
+        return redirect()->intended($this->redirectPath());
+    }
+
+    protected function redirectPath(){
+        
+        $role=Auth::user()->role_id;
+        switch($role){
+          case 1:
+            $path=route('admin.home');
+            break;
+          case 2:
+            $path=route('home');
+            break;
+          default:
+          $path=route('login');
+        }
+        return $path;
+    }
+
+
+
 }
