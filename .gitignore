@@ -15,5 +15,5 @@ resources/views/false.blade.php
 app/Models/Permission.php
 app/Models/RolePermission.php
 app/Providers/RouteServiceProvider.php
-
+/public/Front
 .gitignore
