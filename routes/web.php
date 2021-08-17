@@ -21,34 +21,12 @@ Route::get('/', function () {
 
 
 Auth::routes();
-
+Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin/home','AdminController@home')->name('admin.home');
 
 
 
-Route::get('/master', function () {
-  return view('layouts.master');
-});
 
-
-Route::get('/app', function () {
-  return view('layouts.app');
-});
-
-Route::get('/false', function () {
-  return view('false');
-});
-
-
-
-Route::get('/nav', function () {
-  return view('parts.sidebar');
-});
-
-
-Route::get('/1', function () {
-  return view('starter');
-});
 

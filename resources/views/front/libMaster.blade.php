@@ -13,8 +13,7 @@
   {{-- ### CSS Files ### --}}
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
-  <!-- Scripts -->
-  <script src="{{ asset('js/app.js') }}" defer></script>
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -44,7 +43,7 @@
 <body>
   <!-- Preloader -->
   <div class="preloader flex-column justify-content-center align-items-center">
-    <img class="animation__shake" src="{{ asset('Front/images/TaskManagementLogo1.png') }}" alt="Logo " height="60" width="60">
+    <img class="animation__shake" src="{{ asset('Front/images/TaskManagementLogo.png') }}" alt="Logo " height="60" width="60">
   </div>
 
 
@@ -79,7 +78,7 @@
   <!-- overlayScrollbars -->
   <script src="{{ asset('Front/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
   <!-- AdminLTE App -->
-  <script src="{{ asset('Front/dist/js/adminlte.js') }}"></script>
+  <script src="{{ asset('Front/dist/js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
   <script src="{{ asset('Front/dist/js/demo.js') }}"></script>
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->

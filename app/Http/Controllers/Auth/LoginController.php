@@ -47,10 +47,14 @@ class LoginController extends Controller
     // # edit on default login controller #
     // ####################################
 
+    // ### the user should be enter username and passowrd for use the system
     public function username(){
       return 'name';
     }
 
+    // ### check if user account is active or not 
+    // ### + we check what type of user for redirected to specefic route
+    
     protected function authenticated(Request $request, $user)
     {
         if ($user->accountStatus_id != 1) {
@@ -74,6 +78,12 @@ class LoginController extends Controller
           $path=route('login');
         }
         return $path;
+    }
+
+
+    public function logout(Request $request) {
+      Auth::logout();
+      return redirect('/login');
     }
 
 

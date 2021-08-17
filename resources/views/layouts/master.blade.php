@@ -1,6 +1,6 @@
-@extends('layouts.lib')
+@extends('front.libMaster')
 
-<body class="hold-transition sidebar-mini layout-fixed">
+<body class="hold-transition sidebar-mini ">
   <div class="wrapper">
 
     <!-- Navbar -->
@@ -11,42 +11,23 @@
           <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
 
-        {{-- ######### add pages in Headers #########--}}
+        {{-- ######### add pages in Headers ######### --}}
         @yield('navbar')
 
         {{-- test --}}
-        <li class="nav-item d-none d-sm-inline-block">
-          <a href="#" class="nav-link">page 1<a>
-        </li>
+
+
+
+
+
       </ul>
 
       {{-- #################### --}}
 
       <!-- Right navbar links -->
       <ul class="navbar-nav ml-auto">
-        <!-- Navbar Search -->
-        <li class="nav-item">
-          <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-            <i class="fas fa-search"></i>
-          </a>
-          <div class="navbar-search-block">
-            <form class="form-inline">
-              <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                  <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                  </button>
-                  <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                    <i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
-        </li>
 
-            {{-- #################### --}}
+        {{-- #################### --}}
 
         <!-- fullscreen -->
         <li class="nav-item">
@@ -54,6 +35,53 @@
             <i class="fas fa-expand-arrows-alt"></i>
           </a>
         </li>
+
+
+        {{-- user profile & logout --}}
+        <li class="nav-item dropdown user-menu">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <img src="{{ asset('Front/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2"
+              alt="User Image">
+            <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right" style="left: inherit; right: 0px;">
+            <!-- User image -->
+            <li class="user-header bg-primary">
+              <img src="{{ asset('Front/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                alt="User Image">
+
+              <p>
+                {{ Auth::user()->name }}
+                <small>Position:{{ Auth::user()->role->name }}</small>
+              </p>
+            </li>
+            <!-- Menu Body -->
+            <li class="user-body">
+              <div class="row">
+                <div class="col-4 text-center">
+                  <a href="#">settings</a>
+                </div>
+                <div class="col-4 text-center">
+                  <a href="#">To Do</a>
+                </div>
+                <div class="col-4 text-center">
+                  <a href="#">Achiviement</a>
+                </div>
+              </div>
+              <!-- /.row -->
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <a href="#" class="btn btn-default btn-flat">Profile</a>
+
+              <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right">Sign out</a>
+              <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+              </form>
+            </li>
+          </ul>
+        </li>
+
 
       </ul>
     </nav>
@@ -64,8 +92,9 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
 
       <!-- Brand Logo -->
-      <a href="#" class="brand-link">
-        <img src="{{ asset('Front/images/TaskManagementLogo.png') }}" alt="Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <a href="{{ route('home') }}" class="brand-link">
+        <img src="{{ asset('Front/images/TaskManagementLogo2.png') }}" alt="Logo"
+          class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
       </a>
 
@@ -74,46 +103,58 @@
 
 
 
-        {{-- #### here we put info about user authintecated ###--}}
+        {{-- #### here we put info about user authintecated ### --}}
 
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-          <div class="image">
-            <img src="{{ asset('Front/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-              alt="User Image">
+        
+          <!-- SidebarSearch Form -->
+          <div class="form-inline mt-3 pb-2 d-flex">
+            <div class="input-group" data-widget="sidebar-search">
+              <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                  <i class="fas fa-search fa-fw"></i>
+                </button>
+              </div>
+            </div>
           </div>
 
-          <div class="info">
-            <a href="#" class="d-block">Admin name</a>
-        </div>
+          <div class="user-panel pb-2 mb-3 d-flex">
+          
+          <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
+          <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Home
+                <i class="right fas"></i>
+              </p>
+            </a>
+          </li>
+        </ul>
+          </nav>
+            
         </div>
+        
         {{-- ********************* --}}
 
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
+        <nav class="mt-1">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+            {{-- add workspaces and project --}}
             
-            {{-- add icon  --}}
-            <li class="nav-item menu-open">
-              <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-home"></i>
-                <p>
-                  Home
-                  <i class="right fas"></i>
-                </p>
-              </a>
-            </li>
-
-           
-
+            
 
 
             {{-- ************************************************************************** --}}
             @yield('sidebar')
             {{-- ********************************************************************************* --}}
-            
+
 
         </nav>
         <!-- /.sidebar-menu -->
@@ -165,7 +206,7 @@
   </div>
   <!-- ./wrapper -->
 
-{{-- ############## here you can put content in page ################ --}}
+  {{-- ############## here you can put content in page ################ --}}
   @yield('Content')
 
 </body>

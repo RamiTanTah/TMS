@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+use App\Models\Role;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -45,11 +46,23 @@ class User extends Authenticatable
     ];
 
 
+    // protected $with=['role'];
+
     // ########relation with user ########
-    // ### every user he belogs to a one role in system
+    // ### every user he belongs to a one role in system
 
     public function role(){
       return $this->belongsTo('App\Models\Role','role_id');
     }
 
+    // public function getRoleName(){
+    //   $this->user()->role()->
+
+    // }
+
+
+      
 }
+
+
+
