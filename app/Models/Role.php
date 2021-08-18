@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\User;
+
 class Role extends Model
 {
   protected $table = "roles";
@@ -17,7 +19,7 @@ class Role extends Model
   // every role he have many user 
   
   public function users(){
-    return $this->hasMany('App\User','user_id');
+    return $this->hasMany(User::class,'user_id');
   }
 
 

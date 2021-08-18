@@ -20,10 +20,9 @@ class CreateRolesTable extends Migration
 
         // ######### insert default and static roles for system ###########
         DB::table('roles')->insert([
-          ['id'=> '1', 'name' => 'administrator'],
-          ['id'=> '2', 'name' => 'employee'],
-          ['id'=> '3', 'name' => 'manager'],
-          ['id'=> '4', 'name' => 'project manager']
+          ['id'=> '1', 'name' => 'Administrator'],
+          ['id'=> '2', 'name' => 'Employee'],
+          ['id'=> '3', 'name' => 'Manager'],
         ]);
 
 

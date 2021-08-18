@@ -33,7 +33,10 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 
+        'remember_token',
+        'created_at',
+        'updated_at',
     ];
 
     /**
@@ -52,7 +55,7 @@ class User extends Authenticatable
     // ### every user he belongs to a one role in system
 
     public function role(){
-      return $this->belongsTo('App\Models\Role','role_id');
+      return $this->belongsTo(Role::class,'role_id');
     }
 
     // public function getRoleName(){
