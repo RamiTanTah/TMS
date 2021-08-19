@@ -15,7 +15,7 @@ class HomeController extends Controller
     {
       // ### checkRole middleware for redirect user debendent his role
 
-        $this->middleware(['auth','checkRoleHome']);
+        $this->middleware(['auth','redirectToHome']);
     }
 
     /**

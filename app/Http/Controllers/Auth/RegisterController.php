@@ -9,6 +9,9 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+
 class RegisterController extends Controller
 {
     /*
@@ -36,9 +39,8 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('guest');
+    public function __construct(){
+        $this->middleware('admin');
     }
 
     /**
@@ -47,20 +49,20 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data){
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255', 'unique:users'],
+            'name' => ['required', 'string', 'max:255', 'unique:users' , 'min:3'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            
-            // ####################New Data ###########################
-            'firstName' => ['required', 'string', 'max:50'],
-            'lastName' => ['required', 'string', 'max:50'],
-            
-            'DOB' => ['required', 'date'],
-            'role_id' => ['required','numeric'],
-            'accountStatus_id' => ['required', 'numeric'],
+            'firstName' => ['required', 'string', 'max:50','min:3'],
+            'lastName' => ['required', 'string', 'max:50','min:3'],
+            'DOB' => ['required', 'date',],
+
+            // ### we add this by default value because when we create 
+            // ### new Account (new user) we not have role and workspace yet
+            // ### so now we comment this fields
+            // 'role_id' => ['numeric'],
+            // 'accountStatus_id' => ['required', 'numeric'],
             
         ]);
     }
@@ -80,8 +82,19 @@ class RegisterController extends Controller
             'firstName' => $data['firstName'],
             'lastName' => $data['lastName'],
             'DOB' => $data['DOB'],
-            'role_id' => $data['role_id'],
-            'accountStatus_id' => $data['accountStatus_id'],
+            'role_id' => 4, // role = user by default
+            'accountStatus_id' => 3,  // account_status = New by default
         ]);
     }
+
+    // ### override register method --> laravel:Auth ###
+    public function register(Request $request)
+    {
+        $val=$this->validator($request->all())->validate();
+        event(new Registered($user = $this->create($request->all())));
+        
+        return redirect()->back()->with('success','A new user account has been added successfully'); 
+    }
+
+
 }

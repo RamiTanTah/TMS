@@ -64,21 +64,21 @@ class LoginController extends Controller
         return redirect()->intended($this->redirectPath());
     }
 
-    protected function redirectPath(){
+    // protected function redirectPath(){
         
-        $role=Auth::user()->role_id;
-        switch($role){
-          case 1:
-            $path=route('admin.home');
-            break;
-          case 2:
-            $path=route('home');
-            break;
-          default:
-          $path=route('login');
-        }
-        return $path;
-    }
+    //     $role=Auth::user()->role_id;
+    //     switch($role){
+    //       case 1:
+    //         $path=route('admin.home');
+    //         break;
+    //       case 2:
+    //         $path=route('home');
+    //         break;
+    //       default:
+    //       $path=route('login');
+    //     }
+    //     return $path;
+    // }
 
 
     public function logout(Request $request) {

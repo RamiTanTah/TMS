@@ -22,9 +22,10 @@ class CreateUsersTable extends Migration
             $table->date('DOB');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            
-            $table->foreignId('role_id');
-            $table->foreignId('accountStatus_id');
+            //  role_id = 4 --> role (user by default)
+            $table->foreignId('role_id')->default(4);
+            //  account_status = 3 --> New
+            $table->foreignId('accountStatus_id')->default(3);
             
             $table->rememberToken();
             $table->timestamps();

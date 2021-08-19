@@ -23,6 +23,7 @@ class CreateRolesTable extends Migration
           ['id'=> '1', 'name' => 'Administrator'],
           ['id'=> '2', 'name' => 'Employee'],
           ['id'=> '3', 'name' => 'Manager'],
+          ['id'=> '4', 'name' => 'User'],
         ]);
 
 

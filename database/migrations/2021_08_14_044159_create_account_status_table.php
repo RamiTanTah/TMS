@@ -20,8 +20,9 @@ class CreateAccountStatusTable extends Migration
 
         // ######### insert default and static account status for system ###########
         DB::table('account_status')->insert([
-          ['id'=> '1', 'name' => 'active'],
-          ['id'=> '2', 'name' => 'inactive'],
+          ['id'=> '1', 'name' => 'Activated'],
+          ['id'=> '2', 'name' => 'Closed'],
+          ['id'=> '3', 'name' => 'New'],
         ]);
     }
 
