@@ -4,7 +4,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  
+
 
 <head>
   <meta charset="utf-8">
@@ -26,26 +26,38 @@
 
 
 
+
+
+
 <body class="hold-transition login-page">
   <div class="login-box">
+
+
+
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
         <a href="{{ route('login') }}" class="h1"><b>{{ config('app.name') }}</b></a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Sign in to start your session</p>
 
-
-        {{-- ############## error message ########## --}}
+                  {{-- ############## error message ########## --}}
         {{-- ### if account user is not active or any other error in login operation ### --}}
         @if (session()->has('message'))
           <div class="alert alert-danger">
-            {{ session()->get('message') }}
+            <small>{{ session()->get('message') }}</small>
           </div>
+        @endif
+
+        
+        @if ($errors->any())
+        <div class="alert alert-danger">
+          <small>{{$errors->first()}}</small>
+        </div>
         @endif
         {{-- ############## ########## ########## --}}
 
+        <p class="login-box-msg">Sign in to start your session</p>
         {{-- ### Enter username ### --}}
         <form method="POST" action="{{ route('login') }}">
           @csrf
@@ -111,6 +123,9 @@
           </p>
 
         @endif
+
+
+
       </div>
       <!-- /.card-body -->
     </div>

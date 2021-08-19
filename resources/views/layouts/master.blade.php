@@ -170,7 +170,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent" data-widget="treeview" role="menu"
               data-accordion="false">
               <li class="nav-item ">
-                <a href="#" class="nav-link active">
+                <a href="{{ route('home') }}" class="nav-link active">
                   <i class="nav-icon fas fa fa-home"></i>
                   <p>
                     Home
@@ -244,7 +244,13 @@
     <!-- /.content-wrapper -->
     
     {{-- include footer page --}}
-    @include('includes.footer')
+
+    <footer class="main-footer text-sm">
+      {{-- footer for master page --}}
+      @include('includes.footer')
+
+    </footer>
+    
 
     {{-- include all JS fills  --}}
     @include('includes.script')
