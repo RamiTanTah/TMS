@@ -26,7 +26,6 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-
-
-
-
+Route::group(['prefix' => 'user', 'namespace' => 'User'],function () {
+  Route::get('{id}/profile', 'UserController@profile')->name('user.profile');
+});

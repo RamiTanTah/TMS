@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Models\Role;
+use App\Models\AccountStatus;
 class User extends Authenticatable
 {
     use Notifiable;
@@ -24,7 +25,7 @@ class User extends Authenticatable
           'lastName',
           'DOB',
           'role_id',
-          'accountStatus_id',  
+          'account_status_id',  
     ];
 
     /**
@@ -47,16 +48,78 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
+    
+    // ### validation rules ###
+    // ### we use it with UserRequest ###
+    public const VALIDATION_RULES = [
+      'name'  => [
+                  'required'  ,
+                  'string'    ,
+                  'max:255'   ,
+                  'min:3'     ,
+                  'unique:users',
+      ],
+      'email' => [
+                  'required'  ,
+                  'string'    ,
+                  'email'     ,  
+                  'max:255'   ,
+                  'unique:users',
+      ],
+      'password' => [
+                  'required'  , 
+                  'string'    , 
+                  'min:8'     , 
+                  'confirmed' ,
+      ],
+      'firstName' => [
+                  'required'    , 
+                  'string'      , 
+                  'max:50'      ,
+                  'min:3'       ,
+      ],
+      'lastName' => [
+                  'required'    , 
+                  'string'      , 
+                  'max:50'      ,
+                  'min:3'       ,
+      ],
+      'DOB'     => [
+                  'required'    , 
+                  'date'        ,
+      ],
+      'role_id' => [
+                  'required'    ,
+                  'numeric'     ,
+      ],
+      'account_status_id' => [
+                  'required'    , 
+                  'numeric'     ,
+      ],  
+  ];
 
 
     // protected $with=['role'];
 
     // ########relation with user ########
-    // ### every user he belongs to a one role in system
+    // ### every user he belongs to a one role in the system
 
     public function role(){
       return $this->belongsTo(Role::class,'role_id');
     }
+
+    // ### every user he belongs to a one account_stauts in the system
+    public function account_status(){
+      return $this->belongsTo(AccountStatus::class,'account_status_id');
+    }
+
+    // ### some useful function ###
+    public function getFullNameAttribute(){
+      
+      return "{$this->firstName} {$this->lastName}";
+    }
+
 
 
 

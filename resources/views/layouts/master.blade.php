@@ -15,8 +15,11 @@
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed">
   <div class="wrapper">
 
+    @section('preloader')
     {{-- ### include the preloader for every page ### --}}
     @include('includes.preloader')
+    @show
+    @yield('preloadeContent')
 
     <!-- navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -82,7 +85,7 @@
           {{-- user profile & logout --}}
           <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <img src="{{ asset('Front/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2"
+            <img src="{{ asset('Front/dist/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2"
                 alt="User Image">
               <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
             </a>
@@ -115,7 +118,7 @@
 
               <!-- Menu Footer-->
               <li class="user-footer">
-                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                <a href="{{ route('user.profile',[Auth::user()->id]) }}" class="btn btn-default btn-flat">Profile</a>
                 <a href="{{ route('logout') }}" class="btn btn-default btn-flat float-right">Sign out</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                   @csrf
@@ -228,33 +231,25 @@
     {{-- ################################### --}}
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container-fluid">
 
-          {{-- ### main content in page ### --}}
-            @yield('content')
+      {{-- ### main content in page ### --}}
+      @yield('content')
 
-        </div>
-        <!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
     </div>
-
     <!-- /.content-wrapper -->
-    
-    {{-- include footer page --}}
 
+
+    {{-- include footer page --}}
     <footer class="main-footer text-sm">
       {{-- footer for master page --}}
       @include('includes.footer')
-
     </footer>
-    
 
-    {{-- include all JS fills  --}}
+
+    {{-- include all JS files --}}
     @include('includes.script')
   </div>
   <!-- ./wrapper -->
 </body>
+
 </html>

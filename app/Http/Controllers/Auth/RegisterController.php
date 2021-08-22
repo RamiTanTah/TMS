@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 
+
+
 class RegisterController extends Controller
 {
     /*
@@ -50,22 +52,22 @@ class RegisterController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data){
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255', 'unique:users' , 'min:3'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'firstName' => ['required', 'string', 'max:50','min:3'],
-            'lastName' => ['required', 'string', 'max:50','min:3'],
-            'DOB' => ['required', 'date',],
+      return Validator::make($data, [
+          'name' => ['required', 'string', 'max:255', 'unique:users' , 'min:3'],
+          'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+          'password' => ['required', 'string', 'min:8', 'confirmed'],
+          'firstName' => ['required', 'string', 'max:50','min:3'],
+          'lastName' => ['required', 'string', 'max:50','min:3'],
+          'DOB' => ['required', 'date',],
 
-            // ### we add this by default value because when we create 
-            // ### new Account (new user) we not have role and workspace yet
-            // ### so now we comment this fields
-            // 'role_id' => ['numeric'],
-            // 'accountStatus_id' => ['required', 'numeric'],
-            
-        ]);
-    }
+          // ### we add this by default value because when we create 
+          // ### new Account (new user) we not have role and workspace yet
+          // ### so now we comment this fields
+          // 'role_id' => ['numeric'],
+          // 'accountStatus_id' => ['required', 'numeric'],
+          
+      ]);
+  }
 
     /**
      * Create a new user instance after a valid registration.
