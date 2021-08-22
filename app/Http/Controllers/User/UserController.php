@@ -15,6 +15,7 @@ class UserController extends Controller
     // ### show All users ###
     public function index(){
         $users=$this->getAllUsers();
+        
         return view('user.index',compact('users'));
     }
 
@@ -67,8 +68,8 @@ class UserController extends Controller
         // return $request->account_status_id;
         $user=$this->getUserByID($id);
         
-        $user->firstName          = $request->firstName;
-        $user->lastName           = $request->lastName;
+        $user->firstName          = ucwords($request->firstName);
+        $user->lastName           = ucwords($request->lastName);
         $user->name               = $request->name;
         // Hash::make($data['password'])
         // $user->passowrd           = $request->passowrd;

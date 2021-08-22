@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 */
-
+// middleware Admin is used with all Routes in this file
 
 
 
@@ -19,7 +19,6 @@ Route::group(['prefix' => 'admin'] , function() {
     Route::get('/','AdminController@home')->name('admin.home');
     
 // ### User routes ###
-
     Route::group(['namespace'=>'User','prefix'=>'user'], function(){
       Route::get('show/all','UserController@index')->name('user.index');
       Route::get('edit/{id}','UserController@edit')->name('user.edit');

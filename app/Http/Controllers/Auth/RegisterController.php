@@ -85,7 +85,7 @@ class RegisterController extends Controller
             'lastName' => $data['lastName'],
             'DOB' => $data['DOB'],
             'role_id' => 4, // role = user by default
-            'accountStatus_id' => 3,  // account_status = New by default
+            'account_status_id' => 3,  // account_status = New by default
         ]);
     }
 

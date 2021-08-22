@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             //  role_id = 4 --> role (user by default)
             $table->foreignId('role_id')->default(4);
             //  account_status = 3 --> New
-            $table->foreignId('accountStatus_id')->default(3);
+            $table->foreignId('account_status_id')->default(3);
             
             $table->rememberToken();
             $table->timestamps();
@@ -33,15 +33,15 @@ class CreateUsersTable extends Migration
 
         // for test 
         DB::table('users')->insert([
-          ['id'   => '1',
+          [
            'name' => 'ramiAdmin',
-           'password' => '$2y$10$.GsVm42RmVRHwF6xmLloW./oW9YV6uUaHFaY1uWKtAoPbpKm67FGO',
+           'password' => bcrypt('rami9883'),
            'firstName' => 'rami',
            'lastName' => 'tantah',
-           'DOB' => '15-15-1500',
+           'DOB' => '2021-08-18',
            'email' => 'rami@admin.com',
            'role_id' => '1',
-           'accountStatus_id' => '1'
+           'account_status_id' => '1',
            ]
         ]);
 
