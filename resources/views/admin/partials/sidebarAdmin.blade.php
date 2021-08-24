@@ -33,25 +33,86 @@
 
 <li class="nav-item">
   <a href="#" class="nav-link">
-    <i class="nav-icon fas fa-layer-group"></i>
+    <i class="nav-icon fas fa-cog"></i>
     <p>
-      Workspaces
+     Workspaces (settings)
       <i class="fas fa-angle-left right"></i>
-      <span class="badge badge-info right">2</span>
+      <span class="badge badge-info right"></span>
+    </p>
+  </a>
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="{{ route('workspace.create') }}" class="nav-link">
+        <i class="far fa fa-plus-square"></i>
+        <p>Create New Workspace</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="far fas fa-users"></i>
+        <p>show/edit Workspace</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ route('workspace.index') }}" class="nav-link">
+        <i class="far fas fa-layer-group"></i>
+        <p>Show All workspaces</p>
+      </a>
+    </li>
+  </ul>
+</li>
+
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="nav-icon fas fa-clipboard-list"></i>
+    <p>
+     Projects
+      <i class="fas fa-angle-left right"></i>
+      <span class="badge badge-info right"></span>
     </p>
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
       <a href="#" class="nav-link">
-        <i class="far fa-circle nav-icon"></i>
-        <p>workspcec 1</p>
+        <i class="far fa fa-plus-square"></i>
+        <p>Create New Project</p>
       </a>
     </li>
     <li class="nav-item">
       <a href="#" class="nav-link">
-        <i class="far fa-circle nav-icon"></i>
-        <p>workspace 2</p>
+        <i class="far fas fa-users"></i>
+        <p>show/edit Project</p>
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="far  	fas fa-layer-group"></i>
+        <p>Show All Project</p>
       </a>
     </li>
   </ul>
-</li> 
+</li>
+
+{{-- show all workspace in the system  for admin dashboard --}}
+<li class="nav-item">
+  <a href="#" class="nav-link">
+    <i class="nav-icon fas fa-layer-group"></i>
+    <p>
+      Workspaces
+      <i class="fas fa-angle-left right"></i>
+      <span class="badge badge-info right"></span>
+    </p>
+  </a>
+  @if(isset($workspaces) && $workspaces->count()>0 )
+  @foreach ($workspaces as $workspace)
+  <ul class="nav nav-treeview">
+    <li class="nav-item">
+      <a href="#" class="nav-link">
+        <i class="far fa fa-plus-square"></i>
+        <p>{{ $workspace->name }}</p>
+      </a>
+    </li>
+  </ul>
+  @endforeach
+  @endif
+</li>

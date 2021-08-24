@@ -37,8 +37,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
       $user=$this->getUserByID($id);
       $account_statuses=$this->getAllAccountStatus();
       return view('user.edit',compact(['user','account_statuses'])); 
@@ -49,8 +48,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function profile($id)
-    {
+    public function profile($id){
       $user=$this->getUserByID($id);
         return view('User.profile',compact('user'));
     }
@@ -63,8 +61,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
-    {
+    public function update(UserRequest $request, $id){
         // return $request->account_status_id;
         $user=$this->getUserByID($id);
         
@@ -88,8 +85,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $user=$this->getUserByID($id);
         $user->delete();
         return redirect()->route('user.index')->with(['success' =>'User Account has been deleted successfully']);
@@ -132,6 +128,14 @@ class UserController extends Controller
 
     public function getAllAccountStatus(){
       return AccountStatus::all();
+    }
+
+
+
+    public function editRole($id,$newRoleID){
+      $user = getUserByID($id);
+      $user->role_id = $newRoleID;
+      $user -> save();
     }
 
 }

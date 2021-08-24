@@ -3,23 +3,41 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Workspace extends Model
 {
-  protected $table = 'workspaces';
+    protected $table = 'workspaces';
   
-  protected $fillable = [
+    protected $fillable = [
     'name',
     'created_at',
     'updated_at',
 ];
 
-protected $hidden = [
+    protected $hidden = [
   'created_at',
   'updated_at',
+  'pivot'
 ];
 
-public $timestamps = true;
+    public $timestamps = true;
+
+
+
+
+    // ### relation with ###
+    /**
+     * The users that belong to the Workspace
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'user_workspace')->withTimestamps();
+    }
+    
+    // withPivot(['column'])
 
 
     // ### validation rules ###
@@ -28,23 +46,9 @@ public $timestamps = true;
       'name'  => [
                   'required'  ,
                   'string'    ,
-                  'max:255'   ,
-                  'min:'     ,
+                  'max:50'   ,
+                  'min:3'     ,
                   'unique:workspaces',
       ]
     ];
-
-    // ### relation with ###
-    /**
-     * The users that belong to the Workspace
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function users(): BelongsToMany
-    {
-        return $this->belongsToMany(User::class, 'workspace_user', 'user_id', 'workspace_id');
-    }
-    
-
-
 }

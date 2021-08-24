@@ -73,7 +73,7 @@
                   <div class="form-group">
                     <label for="DOB">Date of breath:</label>
                     <input type="date" class="form-control" placeholder="Date of breath" id="DOB" name="DOB" required
-                      autocomplete="DOB" value="{{ old('DOB') }}" @error('DOB') is-invalid @enderror>
+                      autocomplete="DOB" value="{{ old('DOB') }}" @error('DOB') is-invalid @enderror min="1900-01-01" max="2030-12-31">
                     {{-- ### if the user not fill this field ### --}}
                     <div class="invalid-feedback">Please fill out this field.</div>
 

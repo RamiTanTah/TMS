@@ -20,17 +20,25 @@ Route::group(['prefix' => 'admin'] , function() {
     
 // ### User routes ###
     Route::group(['namespace'=>'User','prefix'=>'user'], function(){
-      Route::get('show/all','UserController@index')->name('user.index');
+      Route::get('index','UserController@index')->name('user.index');
       Route::get('edit/{id}','UserController@edit')->name('user.edit');
       Route::put('update/{id}','UserController@update')->name('user.update');
-      Route::get('delete/{id}','UserController@result')->name('user.result');
+      Route::delete('delete/{id}','UserController@result')->name('user.result');
       Route::get('search','UserController@search')->name('user.search');
       Route::get('result/{q}','UserController@result')->name('user.result');
       Route::get('destroy/{id}','UserController@destroy')->name('user.destroy');
       
   });
 
-  Route::resource('tototo', UserController::class);
+  ### workspace routes ###
+    Route::group(['namespace'=>'Workspace','prefix'=>'workspace'], function(){
+      Route::get('create','WorkspaceController@create')->name('workspace.create');
+      Route::post('store','WorkspaceController@store')->name('workspace.store');
+      Route::get('index','WorkspaceController@index')->name('workspace.index');
+
+
+    });
+
 
     });
 

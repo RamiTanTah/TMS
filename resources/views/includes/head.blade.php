@@ -32,3 +32,7 @@
   <link rel="stylesheet" href="{{ asset('Front/plugins/summernote/summernote-bs4.min.css') }}">
   <!-- BS Stepper -->
   <link rel="stylesheet" href="{{ asset('Front/plugins/bs-stepper/css/bs-stepper.min.css') }}">
+
+  <!-- Select2 -->
+  <link rel="stylesheet" href="{{ asset('Front/plugins/select2/css/select2.min.css') }}">
+  

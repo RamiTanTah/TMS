@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Workspace;
 
 class AdminController extends Controller
 {
     public function home(){
-    
-      return view('admin.home');
+      
+      $workspaces=Workspace::all();
+      return view('admin.home',compact('workspaces'));
     }
 
 

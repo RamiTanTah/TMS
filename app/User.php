@@ -8,6 +8,8 @@ use Illuminate\Notifications\Notifiable;
 
 use App\Models\Role;
 use App\Models\AccountStatus;
+use App\Models\Workspace;
+
 class User extends Authenticatable
 {
     use Notifiable;
@@ -25,7 +27,9 @@ class User extends Authenticatable
           'lastName',
           'DOB',
           'role_id',
-          'account_status_id',  
+          'account_status_id',
+          'created_at',
+          'updated_at',
     ];
 
     /**
@@ -34,10 +38,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 
+        'password',
         'remember_token',
         'created_at',
         'updated_at',
+        'email_verified_at',
+        'pivot'
     ];
 
     /**
@@ -49,7 +55,40 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
+    public $timestamp = true;
     
+    // protected $with=['role'];
+
+    // ########relation with user ########
+    // ### every user he belongs to a one role in the system
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    // ### every user he belongs to a one account_stauts in the system
+    public function account_status()
+    {
+        return $this->belongsTo(AccountStatus::class, 'account_status_id');
+    }
+
+    // ### every user he belongs to a one  or many workspaces in the system
+    public function workspaces()
+    {
+        return $this->belongsToMany(Workspace::class, 'user_workspace');
+    }
+
+
+
+    // ### some useful function ###
+    public function getFullNameAttribute()
+    {
+        return "{$this->firstName} {$this->lastName}";
+    }
+
+
+
     // ### validation rules ###
     // ### we use it with UserRequest ###
     public const VALIDATION_RULES = [
@@ -63,30 +102,30 @@ class User extends Authenticatable
       'email' => [
                   'required'  ,
                   'string'    ,
-                  'email'     ,  
+                  'email'     ,
                   'max:255'   ,
                   'unique:users',
       ],
       'password' => [
-                  'required'  , 
-                  'string'    , 
-                  'min:8'     , 
+                  'required'  ,
+                  'string'    ,
+                  'min:8'     ,
                   'confirmed' ,
       ],
       'firstName' => [
-                  'required'    , 
-                  'string'      , 
+                  'required'    ,
+                  'string'      ,
                   'max:50'      ,
                   'min:3'       ,
       ],
       'lastName' => [
-                  'required'    , 
-                  'string'      , 
+                  'required'    ,
+                  'string'      ,
                   'max:50'      ,
                   'min:3'       ,
       ],
       'DOB'     => [
-                  'required'    , 
+                  'required'    ,
                   'date'        ,
       ],
       'role_id' => [
@@ -94,38 +133,8 @@ class User extends Authenticatable
                   'numeric'     ,
       ],
       'account_status_id' => [
-                  'required'    , 
+                  'required'    ,
                   'numeric'     ,
-      ],  
+      ],
   ];
-
-
-    // protected $with=['role'];
-
-    // ########relation with user ########
-    // ### every user he belongs to a one role in the system
-
-    public function role(){
-      return $this->belongsTo(Role::class,'role_id');
-    }
-
-    // ### every user he belongs to a one account_stauts in the system
-    public function account_status(){
-      return $this->belongsTo(AccountStatus::class,'account_status_id');
-    }
-
-    // ### some useful function ###
-    public function getFullNameAttribute(){
-      
-      return "{$this->firstName} {$this->lastName}";
-    }
-
-
-
-
-
-      
 }
-
-
-

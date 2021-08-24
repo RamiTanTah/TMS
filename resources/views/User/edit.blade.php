@@ -41,8 +41,13 @@
                         {{-- ### user_id ### --}}
                         <div class="form-group">
                           <label for="user_id">User id:</label>
-                          <input class="form-control" id="user_id" name="user_id" value="{{ $user->id }}" required
-                            @error('user_id') is-invalid @enderror disabled>
+                          <input class="form-control"
+                           id="user_id"
+                            name="user_id"
+                             value="{{ $user->id }}"
+                              required
+                            @error('user_id') is-invalid @enderror 
+                            disabled>
 
                           {{-- ### show message if we have any error in validation ### --}}
                           @error('user_id')
@@ -77,7 +82,7 @@
                       <div class="col-sm-6">
                         {{-- ### Account status ### --}}
                         <div class="form-group">
-                          <label for="role_id">Account status:</label>
+                          <label for="account_id">Account status:</label>
                           <select class="form-control"  
                             @error('account_status_id') is-invalid @enderror id="account_status_id" name="account_status_id" >
                             
@@ -147,12 +152,17 @@
                         {{-- ### first name ### --}}
                         <div class="form-group">
                           <label for="firstName">First Name:</label>
-                          <input type="text" class="form-control" placeholder="Enter First Name" id="firstName"
-                            name="firstName" required autocomplete="firstName" value="{{ $user->firstName }}"
-                            @error('firstName') is-invalid @enderror>
+                          <input 
+                          type="text" 
+                          class="form-control" 
+                          placeholder="Enter First Name" 
+                          id="firstName"
+                          name="firstName" 
+                          required autocomplete="firstName" 
+                          value="{{ $user->firstName }}"
+                          @error('firstName') is-invalid @enderror>
                           {{-- ### if the user not fill this field ### --}}
                           <div class="invalid-feedback">Please fill out this field.</div>
-
                           {{-- ### show message if we have any error in validation ### --}}
                           @error('firstname')
                             <small class="form-text text-danger">{{ $message }}</small>
@@ -188,7 +198,7 @@
                         <div class="form-group">
                           <label for="DOB">Date of breath:</label>
                           <input type="date" class="form-control" placeholder="Date of breath" id="DOB" name="DOB"
-                            required autocomplete="DOB" value="{{ $user->DOB }}" @error('DOB') is-invalid @enderror>
+                            required autocomplete="DOB" value="{{ $user->DOB }}" @error('DOB') is-invalid @enderror min="1900-01-01" max="2030-12-31" >
                           {{-- ### if the user not fill this field ### --}}
                           <div class="invalid-feedback">Please fill out this field.</div>
 

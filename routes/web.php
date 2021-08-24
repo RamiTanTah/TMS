@@ -35,3 +35,15 @@ Route::group(['prefix' => 'user', 'namespace' => 'User'],function () {
 // });
 
 
+Route::get('/test', 'TestController@testGet')->name('test.get');
+Route::post('/test/{id}', 'TestController@testPost')->name('test.post');
+Route::get('/testUsers', 'Workspace\WorkspaceController@getNewUsers')->name('test.get');
+
+
+Route::get('/123', function () {
+  return view('layouts.master');
+});
+
+
+Route::get('/ttt', 'testController@testArray')->name('test.get');
+

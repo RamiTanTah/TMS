@@ -48,6 +48,7 @@
                       <th>Email</th>
                       <th>DOB</th>
                       <th>Created at</th>
+                      <th>#</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -55,9 +56,19 @@
                     @foreach ($users as $user)
                       <tr>
                         <td>{{ $user->id }} </td>
+                        {{-- print with red color if user without workspace--}}
+                        @if($user->role_id == 4)
+                        <td class="text-warning"><b>{{ $user->role->name }}</b></td>
+                        @else
                         <td>{{ $user->role->name }} </td>
+                        @endif
                         <td>{{ $user->name }} </td>
+                        {{-- prrint with red color if user account not activa --}}
+                        @if($user->account_status_id != 1)
+                        <td class="text-danger"><b>{{ $user->account_status->name }}</b></td>
+                        @else
                         <td>{{ $user->account_status->name }} </td>
+                        @endif
                         <td>{{ $user->firstName }}</td>
                         <td>{{ $user->lastName }}</td>
                         <td>{{ $user->email }}</td>

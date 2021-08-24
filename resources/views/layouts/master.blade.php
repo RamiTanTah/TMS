@@ -19,8 +19,7 @@
     {{-- ### include the preloader for every page ### --}}
     @include('includes.preloader')
     @show
-    @yield('preloadeContent')
-
+  
     <!-- navbar -->
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
