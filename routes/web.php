@@ -45,5 +45,5 @@ Route::get('/123', function () {
 });
 
 
-Route::get('/ttt', 'testController@testArray')->name('test.get');
+Route::get('/ttt', 'testController@test');
 

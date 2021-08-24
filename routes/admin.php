@@ -39,6 +39,16 @@ Route::group(['prefix' => 'admin'] , function() {
 
     });
 
+     ### project routes ###
+     Route::group(['namespace'=>'Workspace','prefix'=>'project'], function(){
+      Route::get('create','ProjectController@create')->name('projcet.create');
+      Route::post('store','ProjectController@store')->name('projcet.store');
+      Route::get('index','ProjectController@index')->name('projcet.index');
+      Route::get('show/{id}','ProjectController@show')->name('projcet.show');
+
+    });
+
+
 
     });
 

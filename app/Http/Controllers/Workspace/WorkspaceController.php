@@ -19,6 +19,7 @@ class WorkspaceController extends Controller
     public function index()
     {
         $workspaces = Workspace::all();
+        
         return view('workspace.index',compact('workspaces'));
     }
 

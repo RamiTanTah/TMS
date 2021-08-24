@@ -9,14 +9,10 @@ use App\User;
 class Role extends Model
 {
   protected $table = "roles";
-
-  protected $fillable=[
-    'id' , 'name'
-  ];
-
-
+  public $timestamp = false;
+  
   // ### relation with user ###
-  // every role he have many user 
+  // every role have many user 
   
   public function users(){
     return $this->hasMany(User::class,'user_id');

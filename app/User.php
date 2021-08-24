@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use App\Models\AccountStatus;
 use App\Models\Workspace;
+use App\Models\Project;
 
 class User extends Authenticatable
 {
@@ -77,6 +78,12 @@ class User extends Authenticatable
     public function workspaces()
     {
         return $this->belongsToMany(Workspace::class, 'user_workspace');
+    }
+
+    // fK:project_id,user_id
+    public function projects()
+    {
+        return $this->belongsToMany(Project::class, 'project_user')->withTimestamps();
     }
 
 

@@ -23,27 +23,53 @@ class UsersTableSeeder extends Seeder
         'email' => 'rami222@admin.com',
       ]);
 
-        $faker = Faker::create();
+        $user = Faker::create();
         foreach (range(1, 10) as $index) {
             DB::table('users')->insert([
-                'name' => $faker->name,
+                'name' => $user->name,
                 'password' => bcrypt('secret'),
-              'firstName' => $faker->name,
-              'lastName' => $faker->lastName,
-              'DOB' => $faker->date($format = 'Y-m-d', $max = 'now'),
-              'email' => $faker->email,
+              'firstName' => $user->name,
+              'lastName' => $user->lastName,
+              'DOB' => $user->date($format = 'Y-m-d', $max = 'now'),
+              'email' => $user->email,
               'role_id' => 4,
               'account_status_id' => rand(1, 2),
-              'created_at' => $faker->date($format = 'Y-m-d', $max = 'now'),
+              'created_at' => $user->date($format = 'Y-m-d', $min = 'now'),
             ]);
         }
 
-        $faker2 = Faker::create();
+        $workspace = Faker::create();
         foreach (range(1, 10) as $index) {
             DB::table('workspaces')->insert([
-                  'name' => $faker2->name,
-                  'created_at' => $faker2->date($format = 'Y-m-d', $min = 'now'),
-                  'updated_at' => $faker2->date($format = 'Y-m-d', $min = 'now'),
+                  'name' => $workspace->name,
+                  'created_at' => $workspace->date($format = 'Y-m-d', $min = 'now'),
+                  'updated_at' => $workspace->date($format = 'Y-m-d', $min = 'now'),
+              ]);
+        }
+
+        $project = Faker::create();
+        foreach (range(1, 10) as $index) {
+            DB::table('projects')->insert([
+                  'name' => $project->name,
+                  'description'=> $project->name,
+                  'start_date' => $project->date($format = 'Y-m-d', $min = 'now'),
+                  'end_date' => $project->date($format = 'Y-m-d', $min = 'now'),
+                  'deadline'=> $project->date($format = 'Y-m-d', $min = 'now'),
+                  'estimite_time'=> rand(1,100),
+                  'project_status_id' => rand(1,4),
+                  'workspace_id' => rand(1,10),
+                  'created_at' => $workspace->date($format = 'Y-m-d', $min = 'now'),
+                  'updated_at' => $workspace->date($format = 'Y-m-d', $min = 'now'),
+              ]);
+        }
+
+        $Workspace_user = Faker::create();
+        foreach (range(1, 10) as $index) {
+            DB::table('user_workspace')->insert([
+                  'user_id'    => rand(1,10),
+                  'workspace_id'    => rand(1,10),
+                  'created_at' => $workspace->date($format = 'Y-m-d', $min = 'now'),
+                  'updated_at' => $workspace->date($format = 'Y-m-d', $min = 'now'),
               ]);
         }
     }

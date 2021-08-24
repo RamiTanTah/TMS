@@ -1,6 +1,6 @@
 @extends('admin.home')
 
-@section('title', '| workspace')
+@section('title', '| Add workspace')
 
 @section('content')
   <div class="content-header">

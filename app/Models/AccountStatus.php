@@ -7,12 +7,8 @@ use App\Http\User;
 
 class AccountStatus extends Model
 {
+  // just this field have like this name
   protected $table = "account_status";
-
-  protected $fillable=[
-    'id' , 'name'
-  ];
-
   public $timestamps = false;
 
 

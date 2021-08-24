@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Models\Project;
 
 class Workspace extends Model
 {
@@ -26,15 +27,15 @@ class Workspace extends Model
 
 
 
-    // ### relation with ###
-    /**
-     * The users that belong to the Workspace
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
+  
     public function users()
     {
         return $this->belongsToMany(User::class, 'user_workspace')->withTimestamps();
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
     }
     
     // withPivot(['column'])

@@ -29,8 +29,8 @@
                       <tr>
                         <th style="width: 6%">ID</th>
                         <th style="width: 20%">Workspaces</th>
-                        <th style="width: 37%">Projects</th>
-                        <th style="width: 37%">Users</th>
+                        <th style="width: 20%">Projects</th>
+                        <th style="width: 54%">Users</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -38,10 +38,18 @@
                       <tr>
                         <td >{{ $workspace->id }}.</td>
                         <td>{{ $workspace->name }}</td>
-                        <td>#</td>
+                        
+                        <td>
+                        @foreach ($workspace->projects as $project)
+                          <a href="{{ route('projcet.show',[$project->id]) }}" class="text-secondary">
+                            {{ $project->name }} </a><br>
+                          
+                        @endforeach
+                        </td>
                         <td>
                         @foreach ($workspace->users as $user)
-                        <span class="badge bg-primary">{{ $user->name }}</span>
+                        <a href="{{ route('user.profile',[$user->id]) }}" class="badge badge-info">
+                          {{ $user->name }} </a><br>
                         @endforeach
                       </td>
                       </tr>
