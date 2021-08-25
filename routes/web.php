@@ -27,7 +27,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 Route::group(['prefix' => 'user', 'namespace' => 'User'],function () {
-  Route::get('{id}/profile', 'UserController@profile')->name('user.profile');
+  Route::get('profile/{id}', 'UserController@profile')->name('user.profile');
 });
 
 // Route::group(['prefix' => 'workspace', 'namespace' => 'User'],function () {
@@ -41,7 +41,7 @@ Route::get('/testUsers', 'Workspace\WorkspaceController@getNewUsers')->name('tes
 
 
 Route::get('/123', function () {
-  return view('layouts.master');
+  return view('temp');
 });
 
 

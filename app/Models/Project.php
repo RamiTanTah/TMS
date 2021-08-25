@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Workspace;
 use App\User;
 use App\Models\ProjectStatus;
+use App\Models\Task;
 
 class Project extends Model
 {
@@ -60,6 +61,10 @@ class Project extends Model
         return $this->belongsTo(ProjectStatus::class, 'project_status_id');
     }
     
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 
     // ### validation rules ###
     // ### we use it with WorkspaceRequest ###
@@ -90,6 +95,7 @@ class Project extends Model
           'date',
         ],
         'project_status_id' => [
+          'required'    ,
           'numeric'     ,
         ],
         'workspace_id' => [

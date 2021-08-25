@@ -49,7 +49,7 @@
                         <td>
                         @foreach ($workspace->users as $user)
                         <a href="{{ route('user.profile',[$user->id]) }}" class="badge badge-info">
-                          {{ $user->name }} </a><br>
+                          {{ $user->name }} </a>
                         @endforeach
                       </td>
                       </tr>

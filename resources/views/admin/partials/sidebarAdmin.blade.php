@@ -73,7 +73,7 @@
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="#" class="nav-link">
+      <a href="{{ route('projcet.create') }}" class="nav-link">
         <i class="far fa fa-plus-square"></i>
         <p>Create New Project</p>
       </a>
@@ -85,7 +85,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="#" class="nav-link">
+      <a href="{{ route('projcet.index') }}" class="nav-link">
         <i class="far  	fas fa-layer-group"></i>
         <p>Show All Project</p>
       </a>

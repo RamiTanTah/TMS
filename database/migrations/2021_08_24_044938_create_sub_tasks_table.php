@@ -23,6 +23,7 @@ class CreateSubTasksTable extends Migration
           $table->integer('estimite_time')->nullable();
           $table->foreignId('task_status_id')->default(1);
           $table->foreignId('task_id');
+          $table->foreignId('user_id');
           $table->softDeletes('deleted_at', 0);
           $table->timestamps();   
         });

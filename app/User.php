@@ -10,6 +10,8 @@ use App\Models\Role;
 use App\Models\AccountStatus;
 use App\Models\Workspace;
 use App\Models\Project;
+use App\Models\Task;
+use App\Models\SubTask;
 
 class User extends Authenticatable
 {
@@ -84,6 +86,16 @@ class User extends Authenticatable
     public function projects()
     {
         return $this->belongsToMany(Project::class, 'project_user')->withTimestamps();
+    }
+
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class, 'task_user')->withTimestamps();
+    }
+
+    public function sub_tasks()
+    {
+        return $this->hasMany(SubTask::class);
     }
 
 

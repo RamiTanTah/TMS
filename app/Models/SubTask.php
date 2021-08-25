@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\SoftDeletes;
+use App\User;
+use App\Models\TaskStatus;
+use App\Models\Task;
 class SubTask extends Model
 {
   use SoftDeletes;
@@ -37,22 +40,21 @@ class SubTask extends Model
   
   //  ### The users that belong to the Workspace
   // fK:project_id,user_id
-  public function users()
+  public function user()
   {
-      return $this->belongsToMany(User::class, 'project_user')->withTimestamps();
+      return $this->belongsTo(User::class, 'user_id');
   }
 
-
-  public function workspace()
+  public function task_status()
   {
-      return $this->belongsTo(Workspace::class, 'workspace_id');
+      return $this->belongsTo(TaskStatus::class, 'task_status_id');
   }
-  
 
-  public function project_status()
+  public function task()
   {
-      return $this->belongsTo(ProjectStatus::class, 'project_status_id');
+      return $this->belongsTo(Task::class, 'task_id');
   }
+
   
 
   // ### validation rules ###
@@ -81,12 +83,15 @@ class SubTask extends Model
       'estimite_time' => [
         'date',
       ],
-      'project_status_id' => [
+      'task_status_id' => [
         'numeric'     ,
       ],
-      'workspace_id' => [
+      'task_id' => [
         'required'    ,
         'numeric'     ,
+      ],
+      'user_id' => [
+        'required'  ,
       ],
     ];
 }

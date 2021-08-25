@@ -7,13 +7,16 @@ use Illuminate\Http\Request;
 use App\Models\Project;
 use App\Models\Workspace;
 use App\Models\ProjectStatus;
+use App\Models\TaskStatus;
+use App\Models\Task;
+use App\Models\SubTask;
 
 class ProjectController extends Controller
 {
     // show all projects in All workspaces
     public function index()
     {
-        $projects=Project::all();
+       $projects=Project::with(['tasks','users'])->get();
         return view('project.index',compact('projects'));
     }
 
@@ -48,7 +51,17 @@ class ProjectController extends Controller
 
     public function show($id)
     {
-        return Project::find($id);
+        $project=Project::find($id);
+        $task_statuses = TaskStatus::all();
+        $task_toDo = Task::with('sub_tasks')->where('task_status_id',1)->get();
+        $task_progress = Task::with('sub_tasks')->where('task_status_id',2)->get();
+        $task_review = Task::with('sub_tasks')->where('task_status_id',3)->get();
+        $task_complete = Task::with('sub_tasks')->where('task_status_id',4)->get();
+        
+
+
+        return view('project.show',compact(['project','task_statuses','task_toDo','task_progress',
+      'task_review','task_complete']));
     }
 
   

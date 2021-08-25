@@ -1,8 +1,9 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Task;
 
 class TaskStatus extends Model
 {
@@ -13,6 +14,6 @@ class TaskStatus extends Model
     // every task_status have many tasks
     public function tasks()
     {
-        return $this->hasMany(Task::class, 'task_id');
+        return $this->hasMany(Task::class);
     }
 }
