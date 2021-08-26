@@ -30,8 +30,9 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                To Do 
-                <span class="badge badge-info right">{{ $task_toDo->count() }}</span></h3>
+                To Do
+                <span class="badge badge-info right">{{ $task_toDo->count() }}</span>
+              </h3>
               <i class="card-title float-right">
                 <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-ToDo">
                   <i class="nav-icon 	fas fa-plus"></i>
@@ -51,16 +52,17 @@
                         {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
 
                         <i class="card-title float-right">
-                          <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-{{ $task->id }}">
+                          <button type="button" class="btn p-0" data-toggle="modal"
+                            data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
 
                         @include('task.partials.edit')
                       </td>
-                      
+
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-                      
+
                     </tr>
                   @endforeach
                 </tbody>
@@ -76,7 +78,7 @@
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                Progress 
+                Progress
                 <span class="badge badge-info right">{{ $task_progress->count() }}</span>
               </h3>
               <i class="card-title float-right">
@@ -92,23 +94,24 @@
               <table class="table table-head-fixed text-nowrap">
                 <thead>
                 </thead>
-               <tbody>
+                <tbody>
                   @foreach ($task_progress as $task)
                     <tr>
                       <td>
                         {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
 
                         <i class="card-title float-right">
-                          <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-{{ $task->id }}">
+                          <button type="button" class="btn p-0" data-toggle="modal"
+                            data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
 
                         @include('task.partials.edit')
                       </td>
-                      
+
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-                      
+
                     </tr>
                   @endforeach
                 </tbody>
@@ -123,7 +126,8 @@
         <div class="col-3">
           <div class="card">
             <div class="card-header">
-              <h3 class="card-title">Review <span class="badge badge-info right">{{ $task_review->count() }}</span></h3>
+              <h3 class="card-title">Review <span class="badge badge-info right">{{ $task_review->count() }}</span>
+              </h3>
               <i class="card-title float-right">
                 <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-review">
                   <i class="nav-icon 	fas fa-plus"></i>
@@ -143,16 +147,17 @@
                         {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
 
                         <i class="card-title float-right">
-                          <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-{{ $task->id }}">
+                          <button type="button" class="btn p-0" data-toggle="modal"
+                            data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
 
                         @include('task.partials.edit')
                       </td>
-                      
+
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-                      
+
                     </tr>
                   @endforeach
                 </tbody>
@@ -187,16 +192,17 @@
                         {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
 
                         <i class="card-title float-right">
-                          <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-{{ $task->id }}">
+                          <button type="button" class="btn p-0" data-toggle="modal"
+                            data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
 
                         @include('task.partials.edit')
                       </td>
-                      
+
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-                      
+
                     </tr>
                   @endforeach
                 </tbody>

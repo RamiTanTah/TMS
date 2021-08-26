@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 */
 // middleware Admin is used with all Routes in this file
 
+Route::get('testo','AdminController@test')->name('testo.test');
 
 
 Route::group(['prefix' => 'admin'] , function() {
@@ -48,6 +49,8 @@ Route::group(['prefix' => 'admin'] , function() {
 
     });
 
+  
+    Route::get('adminHome','AdminController@adminHome')->name('AdminHome');
 
 
     });

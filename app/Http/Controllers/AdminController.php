@@ -14,5 +14,16 @@ class AdminController extends Controller
       return view('admin.home',compact('workspaces'));
     }
 
+    public function test(){
+      $workspaces=Workspace::with(['projects','users'])->get();
+      
+      return $workspaces;
+    }
+
+    public function adminHome(){
+      $workspaces=Workspace::with(['projects','users'])->get();
+      return view('admin.partials.adminContent',compact('workspaces'));
+    }
+
 
 }

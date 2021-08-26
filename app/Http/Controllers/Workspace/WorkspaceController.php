@@ -66,6 +66,8 @@ class WorkspaceController extends Controller
 
         return redirect()->back()->with(['success' => 'the workspace is created successfuly']);
     }
+    
+    
   
 
 
