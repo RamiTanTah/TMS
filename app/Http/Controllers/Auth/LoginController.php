@@ -58,10 +58,10 @@ class LoginController extends Controller
     
     protected function authenticated(Request $request, $user)
     {
-        // if ($user->account_status_id != 1) {
-        //     Auth::logout();
-        //     return redirect()->route('login')->with('message','Your Account is closed by Administrator');
-        // }
+        if ($user->account_status_id != 1) {
+            Auth::logout();
+            return redirect()->route('login')->with('message','Your Account is closed by Administrator');
+        }
         return redirect()->intended($this->redirectPath());
     }
 
@@ -70,7 +70,7 @@ class LoginController extends Controller
 
     public function logout(Request $request) {
       Auth::logout();
-      return redirect('/login');
+      return redirect()->route('login');
     }
 
 

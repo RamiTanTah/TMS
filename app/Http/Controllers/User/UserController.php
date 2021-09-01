@@ -13,44 +13,49 @@ use App\User;
 class UserController extends Controller
 {
     // ### show All users ###
-    public function index(){
-        $users=$this->getAllUsers();
+    public function index()
+    {
+        $users=User::all();
         
-        return view('user.index',compact('users'));
+        return view('user.index', compact('users'));
     }
 
     // ###  view search page ###
-    public function search(){
+    public function search()
+    {
         return view('user.search');
     }
 
     // ### Displays the result of the search operation ###
-    public function result(Request $request){
-      $users=$this->searchInDB($request->q);
+    public function result(Request $request)
+    {
+        $users=$this->searchInDB($request->q);
         // return $users;
-      return view('user.index',compact('users'));
+        return view('user.index', compact('users'));
     }
 
-        /**
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id){
-      $user=$this->getUserByID($id);
-      $account_statuses=$this->getAllAccountStatus();
-      return view('user.edit',compact(['user','account_statuses'])); 
+    public function edit($id)
+    {
+        $user=$this->getUserByID($id);
+        $account_statuses=$this->getAllAccountStatus();
+        return view('user.edit', compact(['user','account_statuses']));
     }
 
-    /** 
+    /**
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function profile($id){
-      $user=$this->getUserByID($id);
-        return view('User.profile',compact('user'));
+    public function profile($id)
+    {
+        $user=$this->getUserByID($id);
+        return view('User.profile', compact('user'));
     }
 
     
@@ -61,7 +66,8 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id){
+    public function update(UserRequest $request, $id)
+    {
         // return $request->account_status_id;
         $user=$this->getUserByID($id);
         
@@ -85,57 +91,56 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id){
+    public function destroy($id)
+    {
         $user=$this->getUserByID($id);
         $user->delete();
         return redirect()->route('user.index')->with(['success' =>'User Account has been deleted successfully']);
     }
 
-    // get all users from Database
-    public function getAllUsers(){
-      $users=User::all();
-      return $users;
-    }
+
 
     /**
-     * @param string $keyword 
+     * @param string $keyword
      * check in columns id,name,firstname,lastname
      */
 
     // ### searching for the user in the Database ###
-    public function searchInDB($keyword){
-      // ### check if the keyword is numeric for search in id column
-      if(is_numeric($keyword)){
+    public function searchInDB($keyword)
+    {
+        // ### check if the keyword is numeric for search in id column
+        if (is_numeric($keyword)) {
+            $users=User::where('id', "$keyword")->get();
         
-        $users=User::where('id',"$keyword")->get();
-        
+            return $users;
+        } else {
+            // ### else check in columns : name , firstname , lastname
+            $users=User::where(function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%$keyword%")
+                ->Orwhere('firstName', 'LIKE', "%$keyword%")
+                ->OrWhere('lastName', 'LIKE', "%$keyword%");
+            })->get();
+        }
         return $users;
-      }
-      else{
-        // ### else check in columns : name , firstname , lastname
-         $users=User::where(function($query) use($keyword){
-          $query->where('name','LIKE',"%$keyword%")
-                ->Orwhere('firstName','LIKE',"%$keyword%")
-                ->OrWhere('lastName','LIKE',"%$keyword%");})->get();
-      }
-      return $users;
     }
 
 
-    public function getUserByID($id){
-      return User::find($id);
+    public function getUserByID($id)
+    {
+        return User::find($id);
     }
 
-    public function getAllAccountStatus(){
-      return AccountStatus::all();
+    public function getAllAccountStatus()
+    {
+        return AccountStatus::all();
     }
 
 
 
-    public function editRole($id,$newRoleID){
-      $user = getUserByID($id);
-      $user->role_id = $newRoleID;
-      $user -> save();
+    public function editRole($id, $newRoleID)
+    {
+        $user = getUserByID($id);
+        $user->role_id = $newRoleID;
+        $user -> save();
     }
-
 }

@@ -11,10 +11,14 @@
       <section class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
               <h1>{{ $project->name }} - {{ $project->workspace->name }}</h1>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-xl-newTask">
+                <i class="nav-icon 	fas fa-plus"></i>New task
+              </button>
+              @include('task.partials.modals.create')
             </div>
           </div>
         </div><!-- /.container-fluid -->
@@ -34,9 +38,9 @@
                 <span class="badge badge-info right">{{ $task_toDo->count() }}</span>
               </h3>
               <i class="card-title float-right">
-                <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-ToDo">
+                {{-- <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-ToDo">
                   <i class="nav-icon 	fas fa-plus"></i>
-                </button>
+                </button> --}}
               </i>
             </div>
             <!-- /.card-header -->
@@ -46,25 +50,24 @@
                 <thead>
                 </thead>
                 <tbody>
+                  @if(isset($task_toDo) && $task_toDo -> count()>0)
                   @foreach ($task_toDo as $task)
                     <tr>
-                      <td>
-                        {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
-
-                        <i class="card-title float-right">
+                      <td style="width: 5%">
+                        <i class="card-title">
                           <button type="button" class="btn p-0" data-toggle="modal"
                             data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
-
-                        @include('task.partials.edit')
+                        @include('task.partials.modals.edit')
                       </td>
 
                       <td>{{ $task->name }}-({{ $task->id }})</td>
 
                     </tr>
                   @endforeach
+                  @endif
                 </tbody>
               </table>
             </div>
@@ -82,9 +85,9 @@
                 <span class="badge badge-info right">{{ $task_progress->count() }}</span>
               </h3>
               <i class="card-title float-right">
-                <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-progress">
+                {{-- <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-progress">
                   <i class="nav-icon 	fas fa-plus"></i>
-                </button>
+                </button> --}}
               </i>
             </div>
             <!-- /.card-header -->
@@ -95,25 +98,22 @@
                 <thead>
                 </thead>
                 <tbody>
+                  @if(isset($task_progress) && $task_progress -> count()>0)
                   @foreach ($task_progress as $task)
                     <tr>
-                      <td>
-                        {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
-
-                        <i class="card-title float-right">
+                      <td style="width: 5%">
+                        <i class="card-title">
                           <button type="button" class="btn p-0" data-toggle="modal"
                             data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
-
-                        @include('task.partials.edit')
+                        @include('task.partials.modals.edit')
                       </td>
-
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-
                     </tr>
                   @endforeach
+                  @endif
                 </tbody>
               </table>
             </div>
@@ -129,9 +129,9 @@
               <h3 class="card-title">Review <span class="badge badge-info right">{{ $task_review->count() }}</span>
               </h3>
               <i class="card-title float-right">
-                <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-review">
+                {{-- <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-review">
                   <i class="nav-icon 	fas fa-plus"></i>
-                </button>
+                </button> --}}
               </i>
 
             </div>
@@ -141,25 +141,22 @@
                 <thead>
                 </thead>
                 <tbody>
+                  @if(isset($task_review) && $task_review -> count()>0)
                   @foreach ($task_review as $task)
                     <tr>
-                      <td>
-                        {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
-
-                        <i class="card-title float-right">
+                      <td style="width: 5%">
+                        <i class="card-title">
                           <button type="button" class="btn p-0" data-toggle="modal"
                             data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
-
-                        @include('task.partials.edit')
+                        @include('task.partials.modals.edit')
                       </td>
-
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-
                     </tr>
                   @endforeach
+                  @endif
                 </tbody>
               </table>
             </div>
@@ -174,9 +171,9 @@
               <h3 class="card-title">Complete <span class="badge badge-info right">{{ $task_complete->count() }}</span>
               </h3>
               <i class="card-title float-right">
-                <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-complete">
+                {{-- <button type="button" class="btn p-0" data-toggle="modal" data-target="#modal-xl-complete">
                   <i class="nav-icon 	fas fa-plus"></i>
-                </button>
+                </button> --}}
               </i>
 
             </div>
@@ -186,25 +183,22 @@
                 <thead>
                 </thead>
                 <tbody>
+                  @if(isset($task_complete) && $task_complete -> count()>0)
                   @foreach ($task_complete as $task)
                     <tr>
-                      <td>
-                        {{-- <i class="card-title float-right"><a href="#" class="nav-icon 	"></a></i> --}}
-
-                        <i class="card-title float-right">
+                      <td style="width: 5%">
+                        <i class="card-title">
                           <button type="button" class="btn p-0" data-toggle="modal"
                             data-target="#modal-xl-{{ $task->id }}">
                             <i class="nav-icon 	fa fa-ellipsis-h"></i>
                           </button>
                         </i>
-
-                        @include('task.partials.edit')
+                        @include('task.partials.modals.edit')
                       </td>
-
                       <td>{{ $task->name }}-({{ $task->id }})</td>
-
                     </tr>
                   @endforeach
+                  @endif
                 </tbody>
               </table>
             </div>
@@ -215,13 +209,6 @@
         <!-- /.col-3 -->
       </div>
       <!-- /.row -->
-
-
-
-
-
-
-
     </div>
     <!-- /.container-fluid -->
   </div>

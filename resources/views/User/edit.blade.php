@@ -5,7 +5,7 @@
 @section('content')
   <div class="content-header">
     <div class="container-fluid">
-      
+
       @include('includes.successAlert')
       @include('includes.errorAlert')
 
@@ -21,7 +21,7 @@
 
 
           <!-- form start -->
-          <form action="{{ route('user.update',[$user->id]) }}" method="POST" class="was-validated">
+          <form action="{{ route('user.update', [$user->id]) }}" method="POST" class="was-validated">
             @method('PUT')
             @csrf
 
@@ -41,13 +41,8 @@
                         {{-- ### user_id ### --}}
                         <div class="form-group">
                           <label for="user_id">User id:</label>
-                          <input class="form-control"
-                           id="user_id"
-                            name="user_id"
-                             value="{{ $user->id }}"
-                              required
-                            @error('user_id') is-invalid @enderror 
-                            disabled>
+                          <input class="form-control" id="user_id" name="user_id" value="{{ $user->id }}" required
+                            @error('user_id') is-invalid @enderror disabled>
 
                           {{-- ### show message if we have any error in validation ### --}}
                           @error('user_id')
@@ -62,10 +57,10 @@
                         {{-- ### role ### --}}
                         <div class="form-group">
                           <label for="role_id">User role:</label>
-                          <select class="form-control"   disabled>
+                          <select class="form-control" disabled>
                             <option selected value="{{ $user->role_id }}">{{ $user->role->name }}</option>
                           </select>
-                          <input hidden id="role_id" name="role_id"  value="{{ $user->role_id }}">
+                          <input hidden id="role_id" name="role_id" value="{{ $user->role_id }}">
 
                           {{-- ### show message if we have any error in validation ### --}}
                           @error('role_id')
@@ -83,17 +78,17 @@
                         {{-- ### Account status ### --}}
                         <div class="form-group">
                           <label for="account_id">Account status:</label>
-                          <select class="form-control"  
-                            @error('account_status_id') is-invalid @enderror id="account_status_id" name="account_status_id" >
-                            
+                          <select class="form-control" @error('account_status_id') is-invalid @enderror
+                            id="account_status_id" name="account_status_id">
+
                             <option selected value="{{ $user->account_status_id }}">{{ $user->account_status->name }}
                             </option>
-                            
+
                             @if (isset($account_statuses) && $account_statuses->count() > 0)
                               @foreach ($account_statuses as $account_status)
-                              @if ($account_status->id == $user->account_status_id)
-                                @continue
-                              @endif
+                                @if ($account_status->id == $user->account_status_id)
+                                  @continue
+                                @endif
                                 <option value="{{ $account_status->id }}">{{ $account_status->name }}</option>
                               @endforeach
                             @endif
@@ -113,9 +108,8 @@
                         {{-- ### Account status ### --}}
                         <div class="form-group">
                           <label for="created_at">Created at:</label>
-                          <input class="form-control" id="created_at" name="created_at"
-                            value="{{ $user->created_at }}" autocomplete="created_at" 
-                            @error('created_at') is-invalid @enderror disabled>
+                          <input class="form-control" id="created_at" name="created_at" value="{{ $user->created_at }}"
+                            autocomplete="created_at" @error('created_at') is-invalid @enderror disabled>
 
                           {{-- ### show message if we have any error in validation ### --}}
                           @error('created_at')
@@ -152,15 +146,9 @@
                         {{-- ### first name ### --}}
                         <div class="form-group">
                           <label for="firstName">First Name:</label>
-                          <input 
-                          type="text" 
-                          class="form-control" 
-                          placeholder="Enter First Name" 
-                          id="firstName"
-                          name="firstName" 
-                          required autocomplete="firstName" 
-                          value="{{ $user->firstName }}"
-                          @error('firstName') is-invalid @enderror>
+                          <input type="text" class="form-control" placeholder="Enter First Name" id="firstName"
+                            name="firstName" required autocomplete="firstName" value="{{ $user->firstName }}"
+                            @error('firstName') is-invalid @enderror>
                           {{-- ### if the user not fill this field ### --}}
                           <div class="invalid-feedback">Please fill out this field.</div>
                           {{-- ### show message if we have any error in validation ### --}}
@@ -198,7 +186,8 @@
                         <div class="form-group">
                           <label for="DOB">Date of breath:</label>
                           <input type="date" class="form-control" placeholder="Date of breath" id="DOB" name="DOB"
-                            required autocomplete="DOB" value="{{ $user->DOB }}" @error('DOB') is-invalid @enderror min="1900-01-01" max="2030-12-31" >
+                            required autocomplete="DOB" value="{{ $user->DOB }}" @error('DOB') is-invalid @enderror
+                            min="1900-01-01" max="2030-12-31">
                           {{-- ### if the user not fill this field ### --}}
                           <div class="invalid-feedback">Please fill out this field.</div>
 
@@ -363,7 +352,7 @@
               </div>
               <!-- /.Modal -->
 
-              <a href="{{ route('user.profile',[$user->id]) }}" class="btn btn-success">
+              <a href="{{ route('user.profile', [$user->id]) }}" class="btn btn-success">
                 View profile
               </a>
 
@@ -396,7 +385,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <a href="{{ route('user.destroy',[$user->id]) }}" class="btn btn-danger">Delete</a>
+                      <a href="{{ route('user.destroy', [$user->id]) }}" class="btn btn-danger">Delete</a>
                     </div>
                   </div>
                 </div>

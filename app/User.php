@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+// the classes with relations
 use App\Models\Role;
 use App\Models\AccountStatus;
 use App\Models\Workspace;
@@ -101,6 +102,7 @@ class User extends Authenticatable
 
 
     // ### some useful function ###
+    
     public function getFullNameAttribute()
     {
         return "{$this->firstName} {$this->lastName}";

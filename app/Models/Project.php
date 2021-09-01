@@ -75,24 +75,30 @@ class Project extends Model
                   'string'    ,
                   'max:50'   ,
                   'min:3'     ,
+                  'unique:projects'
       ],
         'description' => [
           'string'  ,
           'max:500' ,
+          'nullable' ,
         ],
         'start_date' => [
           'date',
           'before_or_equal:end_date',
+          'nullable' ,
         ],
         'end_date' => [
           'date',
           'after_or_equal:start_date',
+          'nullable' ,
         ],
         'deadline' => [
           'date',
+          'nullable' ,
         ],
         'estimite_time' => [
           'date',
+          'nullable' ,
         ],
         'project_status_id' => [
           'required'    ,

@@ -13,32 +13,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
-
-
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-
+// ### User Route
 Route::group(['prefix' => 'user', 'namespace' => 'User'],function () {
   Route::get('profile/{id}', 'UserController@profile')->name('user.profile');
+  
 });
 
-// Route::group(['prefix' => 'workspace', 'namespace' => 'User'],function () {
-//   Route::get('{id}/profile', 'UserController@profile')->name('user.profile');
-// });
 
 
+// test##################################################################################
 Route::get('/test', 'TestController@testGet')->name('test.get');
 Route::post('/test/{id}', 'TestController@testPost')->name('test.post');
 Route::get('/testUsers', 'Workspace\WorkspaceController@getNewUsers')->name('test.get');
-
 
 Route::get('/123', function () {
   return view('temp');
@@ -46,4 +35,12 @@ Route::get('/123', function () {
 
 
 Route::get('/ttt', 'testController@test');
+// Route::group(['prefix' => 'workspace', 'namespace' => 'User'],function () {
+//   Route::get('{id}/profile', 'UserController@profile')->name('user.profile');
 
+Route::get('/', function () {
+  return view('welcome');
+});
+Route::get('/home', 'HomeController@index')->name('home');
+// });
+// test##################################################################################

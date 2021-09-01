@@ -117,5 +117,4 @@
     <!-- /.container-fluid -->
   </div>
   <!-- /.content-header -->
-  </section>
 @endsection

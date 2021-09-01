@@ -11,21 +11,15 @@ use App\Models\Workspace;
 
 class WorkspaceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $workspaces = Workspace::all();
+ 
+    public function index(){
+        $workspaces = Workspace::paginate(5);
         
         return view('workspace.index',compact('workspaces'));
     }
 
-    // create new workspace 
-    public function create()
-    {
+    
+    public function create(){
         $users=$this->getNewUsersToWorkspace();
         return view('workspace.create', compact('users'));
     }
@@ -74,42 +68,36 @@ class WorkspaceController extends Controller
 
     public function show($id)
     {
-        //
+        $workspace = Workspace::find($id);
+        $users = User::where('role_id', 4)
+      ->where('account_status_id', 1)->get();
+        return view('workspace.show',compact(['workspace','users']));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit($id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(WorkspaceRequest $request, $id)
     {
-        //
+      $data=request()->except(['_token','_method']);
+      $result = array_filter($data);
+      
+      Project::where('id',$id)->update($result);
+      return redirect()->route('workspace.show',[$id])->with(['success' => 'the Member added successfully']);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
         //
     }
+
+    
 
 
 

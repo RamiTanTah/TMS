@@ -38,13 +38,13 @@
                       <tr>
                         <td >{{ $project->id }}.</td>
                         <td>
-                          <a href="{{ route('projcet.show',[$project->id]) }}" class="text-secondary">
+                          <a href="{{ route('project.show',[$project->id]) }}" class="text-secondary">
                             {{ $project->name }} </a>
                         </td>
                         
                         <td>
                         @foreach ($project->tasks as $task)
-                          <a href="{{ route('projcet.show',[$task->id]) }}" class="text-secondary">
+                          <a href="{{ route('project.show',[$task->id]) }}" class="text-secondary">
                             {{ $task->name }} </a><br>
                           
                         @endforeach

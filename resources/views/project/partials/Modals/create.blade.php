@@ -1,36 +1,21 @@
-@extends('admin.home')
+<div class="modal fade" id="modal-xl-{{ $workspace->name }}">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title mr-3">Add new Project to {{ $workspace->name }}</h4>
 
-@section('title', '| Project Add ')
-
-@section('content')
-  <div class="content-header">
-    <div class="container-fluid">
-
-      @include('includes.successAlert')
-      @include('includes.errorAlert')
-
-
-      <!-- Content Header (Page header) -->
-      <section class="content-header">
-        <div class="container-fluid">
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>Project Add</h1>
-            </div>
-          </div>
-        </div><!-- /.container-fluid -->
-      </section>
-
-      <!-- Main content -->
-      <section class="content">
-
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <!-- /.modal-header -->
+      <div class="modal-body">
         <div class="Form">
           <form action="{{ route('project.store') }}" method="POST">
             @csrf
-
-
-
+            {{-- New Project --}}
             <div class="row">
+
               <div class="col-md-6">
                 <div class="card card-primary">
 
@@ -78,11 +63,26 @@
                     </div>
                     <!-- /.form-group -->
 
+
+                    <div class="form-group">
+                      <label for="workspace_id">workspace</label>
+                      <input type="text" class="form-control" placeholder="{{ $workspace->name }}" 
+                        autocomplete="workspace_id" value="{{ $workspace->name }}" @error('workspace_id') is-invalid @enderror disabled>
+                        <input hidden type="text" id="workspace_id" name="workspace_id" value="{{ $workspace->id }}">
+                      {{-- ### if the user not fill this field ### --}}
+                      <div class="invalid-feedback">Please fill out this field.</div>
+                      {{-- ### show message if we have any error in validation ### --}}
+                      @error('workspace_id')
+                        <small class="form-text text-danger">{{ $message }}</small>
+                      @enderror
+                    </div>
+                    <!-- /.form-group -->
+
                     {{-- status --}}
                     <div class="form-group">
                       <label for="project_status_id">status</label>
-                      <select class="form-control" data-placeholder="Select a project status" @error('project_status_id') is-invalid
-                        @enderror id="project_status_id" name="project_status_id" required>
+                      <select class="form-control"  @error('project_status_id')
+                        is-invalid @enderror id="project_status_id" name="project_status_id" required>
 
                         <option selected value="" disabled> Select a Project status</option>
                         @if (isset($project_statuses) && $project_statuses->count() > 0)
@@ -99,29 +99,28 @@
                     </div>
                     <!-- /.form-group -->
 
-                    {{-- ### workspace ### --}}
-                    <div class="form-group">
-                      <label for="workspace_id">workspace</label>
-                      <select class="form-control" data-placeholder="Select a workspace" @error('workspace_id') is-invalid
-                        @enderror id="workspace_id" name="workspace_id" required>
+                    
 
-                        <option selected value="" disabled> Select a workspace</option>
-                        @if (isset($workspaces) && $workspaces->count() > 0)
-                          @foreach ($workspaces as $workspace)
-                            <option value="{{ $workspace->id }}">{{ $workspace->name }}</option>
+                    <!-- Members in workspace -->
+                    <div class="form-group">
+                      <label>Members</label>
+                      <select class="select2" multiple="multiple" data-placeholder="Select a member"
+                        style="width: 100%;" name='members[]' size="{{ count($workspace->users) }}"
+                        @error('member[]') is-invalid @enderror value='0'>
+
+                        @if (isset($workspace->users) && $workspace->users->count() > 0)
+                          @foreach ($workspace->users as $user)
+                            <option value="{{ $user->id }}">{{ $user->name }}</option>
                           @endforeach
                         @endif
                       </select>
 
                       {{-- ### show message if we have any error in validation ### --}}
-                      @error('workspace_id')
+                      @error('members[]')
                         <small class="form-text text-danger">{{ $message }}</small>
                       @enderror
                     </div>
                     <!-- /.form-group -->
-
-
-
 
                   </div>
                   <!-- /.card-body -->
@@ -146,7 +145,7 @@
                     {{-- ### start_date ### --}}
                     <div class="form-group">
                       <label for="start_date">start date:</label>
-                      <input type="date" class="form-control" placeholder="start date" id="start_date" name="start_date" 
+                      <input type="date" class="form-control" placeholder="start date" id="start_date" name="start_date"
                         autocomplete="start_date" value="{{ old('start_date') }}" @error('start_date') is-invalid
                         @enderror min="2010-1-1" max="2030-12-31">
                       {{-- ### if the user not fill this field ### --}}
@@ -161,7 +160,7 @@
                     {{-- ### end_date ### --}}
                     <div class="form-group">
                       <label for="end_date">end date:</label>
-                      <input type="date" class="form-control" placeholder="end date" id="end_date" name="end_date" 
+                      <input type="date" class="form-control" placeholder="end date" id="end_date" name="end_date"
                         autocomplete="end_date" value="{{ old('end_date') }}" @error('end_date') is-invalid @enderror
                         min="2010-1-1" max="2030-12-31">
                       {{-- ### if the user not fill this field ### --}}
@@ -176,7 +175,7 @@
                     {{-- ### deadline ### --}}
                     <div class="form-group">
                       <label for="deadline">deadline:</label>
-                      <input type="date" class="form-control" placeholder="dead line" id="deadline" name="deadline" 
+                      <input type="date" class="form-control" placeholder="dead line" id="deadline" name="deadline"
                         autocomplete="deadline" value="{{ old('deadline') }}" @error('deadline') is-invalid @enderror
                         min="2010-1-1" max="2030-12-31">
                       {{-- ### if the user not fill this field ### --}}
@@ -194,7 +193,7 @@
                       <label for="estimite_time">estimite time:</label>
                       <input type="number" class="form-control" placeholder="enter time  e.g. 3h,20m" id="estimite_time"
                         name="estimite_time" autocomplete="estimite_time" value="{{ old('estimite_time') }}"
-                        @error('estimite_time') is-invalid @enderror >
+                        @error('estimite_time') is-invalid @enderror>
                       {{-- ### if the user not fill this field ### --}}
                       <div class="invalid-feedback">Please fill out this field.</div>
 
@@ -210,30 +209,25 @@
                 <!-- /.card -->
               </div>
               <!-- /.col-md-6 -->
+
             </div>
-            <!--/.row-->
+            <!-- /.row -->
 
             <div class="row">
               <div class="col-md-4 offset-md-5">
                 <button type="submit" class="btn btn-success ">Create New project</button>
               </div>
-              <!-- /.col-md-6 -->
             </div>
             <!-- /.row -->
 
           </form>
         </div>
-        <!--/.Form-->
-
-
-
-
-      </section>
-      <!-- /.content -->
-
-
+        <!-- /.Form -->
+      </div>
+      <!-- /.modal-body -->
     </div>
-    <!-- /.container-fluid -->
+    <!-- /.modal-content -->
   </div>
-  <!-- /.content-header-->
-@endsection
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal fade -->

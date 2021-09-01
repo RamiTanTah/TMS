@@ -33,7 +33,7 @@
 
 <li class="nav-item">
   <a href="#" class="nav-link">
-    <i class="nav-icon fas fa-cog"></i>
+    <i class="nav-icon fas fa-layer-group"></i>
     <p>
      Workspaces (settings)
       <i class="fas fa-angle-left right"></i>
@@ -73,7 +73,7 @@
   </a>
   <ul class="nav nav-treeview">
     <li class="nav-item">
-      <a href="{{ route('projcet.create') }}" class="nav-link">
+      <a href="{{ route('project.create') }}" class="nav-link">
         <i class="far fa fa-plus-square"></i>
         <p>Create New Project</p>
       </a>
@@ -85,7 +85,7 @@
       </a>
     </li>
     <li class="nav-item">
-      <a href="{{ route('projcet.index') }}" class="nav-link">
+      <a href="{{ route('project.index') }}" class="nav-link">
         <i class="far  	fas fa-layer-group"></i>
         <p>Show All Project</p>
       </a>
@@ -93,8 +93,9 @@
   </ul>
 </li>
 
+
 {{-- show all workspace in the system  for admin dashboard --}}
-<li class="nav-item">
+{{-- <li class="nav-item">
   <a href="#" class="nav-link">
     <i class="nav-icon fas fa-layer-group"></i>
     <p>
@@ -115,4 +116,4 @@
   </ul>
   @endforeach
   @endif
-</li>
+</li> --}}
