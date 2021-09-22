@@ -13,6 +13,9 @@
 
   <title>{{ config('app.name') }}</title>
 
+  <!-- icon for browser -->
+  @include('includes.icon')
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
     href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -41,7 +44,7 @@
       </div>
       <div class="card-body">
 
-                  {{-- ############## error message ########## --}}
+        {{-- ############## error message ########## --}}
         {{-- ### if account user is not active or any other error in login operation ### --}}
         @if (session()->has('message'))
           <div class="alert alert-danger">
@@ -49,11 +52,11 @@
           </div>
         @endif
 
-        
+
         @if ($errors->any())
-        <div class="alert alert-danger">
-          <small>{{$errors->first()}}</small>
-        </div>
+          <div class="alert alert-danger">
+            <small>{{ $errors->first() }}</small>
+          </div>
         @endif
         {{-- ############## ########## ########## --}}
 

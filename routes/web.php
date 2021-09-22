@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('logout', 'Auth\LoginController@logout')->name('logout');
 
+//  ### Redirect to login page 
+
+
 // ### User Route
 Route::group(['prefix' => 'user', 'namespace' => 'User'],function () {
   Route::get('profile/{id}', 'UserController@profile')->name('user.profile');

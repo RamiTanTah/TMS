@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use Auth;
 use App\User;
-use  Illuminate\Http\Request;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 

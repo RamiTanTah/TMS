@@ -1,8 +1,7 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  {{-- icon for browser --}}
-  <link rel="icon" href="{{ URL::asset('Front/images/TaskManagementLogo.png') }}" type="image/x-icon"/>
 
+  @include('includes.icon')
 
   {{-- ### CSS Files ### --}}
   <!-- CSRF Token -->
